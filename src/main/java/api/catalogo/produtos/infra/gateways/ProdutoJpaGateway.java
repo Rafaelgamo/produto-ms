@@ -2,10 +2,13 @@ package api.catalogo.produtos.infra.gateways;
 
 import api.catalogo.produtos.application.gateways.ProdutoGateway;
 import api.catalogo.produtos.domain.entity.Produto;
+import api.catalogo.produtos.infra.dto.ListaProdutoDTO;
 import api.catalogo.produtos.infra.dto.ProdutoDTO;
 import api.catalogo.produtos.infra.persistence.ProdutoEntity;
 import api.catalogo.produtos.infra.persistence.ProdutoRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
@@ -88,8 +91,6 @@ public class ProdutoJpaGateway implements ProdutoGateway {
 
         produtoRepository.save(entidade);
     }
-
-
 
 }
 

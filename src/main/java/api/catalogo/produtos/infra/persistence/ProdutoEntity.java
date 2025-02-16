@@ -23,6 +23,13 @@ public class ProdutoEntity {
     public ProdutoEntity() {
     }
 
+    public ProdutoEntity(Long id, String nome, String valor) {
+        this.id = id;
+        this.nome = nome;
+        this.valor = valor;
+
+    }
+
     public ProdutoEntity(String nome, String tipo, String descricao, String valor, Double quantidadeEstoque, Double quantidadeReservada, LocalDateTime horaImportacao) {
         this.nome = nome;
         this.tipo = tipo;

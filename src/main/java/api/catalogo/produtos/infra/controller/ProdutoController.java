@@ -1,10 +1,10 @@
 package api.catalogo.produtos.infra.controller;
 
 
-import api.catalogo.produtos.application.json.ProdutoProValorJson;
 import api.catalogo.produtos.application.usecases.*;
 import api.catalogo.produtos.domain.entity.Produto;
 import api.catalogo.produtos.infra.dto.AlteraProdutoDTO;
+import api.catalogo.produtos.infra.dto.ListaProdutoDTO;
 import api.catalogo.produtos.infra.dto.ProdutoDTO;
 import api.catalogo.produtos.infra.persistence.ProdutoRepository;
 import jakarta.validation.Valid;
@@ -55,7 +55,7 @@ public class ProdutoController {
     @GetMapping
     public List<ProdutoDTO> listarPedidos() {
         return buscarProdutoUseCase.listarProdutos().stream()
-                .map(p -> new ProdutoDTO(null, p.getNome(), p.getTipo(),p.getDescricao(), p.getValor(), p.getQuantidadeEstoque(), p.getQuantidadeReservada(), LocalDateTime.now() ))
+                .map(p -> new ProdutoDTO(null, p.getNome(), p.getTipo(), p.getDescricao(), p.getValor(), p.getQuantidadeEstoque(), p.getQuantidadeReservada(), LocalDateTime.now()))
                 .collect(Collectors.toList());
     }
 
@@ -74,8 +74,9 @@ public class ProdutoController {
     }
 
 
-   }
 
+
+}
 
 
 

@@ -44,8 +44,6 @@ public class BaixarEstoqueUseCase {
 
     }
 
-    public void zerarReserva(Long pedidoId, Map<Long, Double> quantidades) {
 
-    }
 
-}
+  }

@@ -24,6 +24,12 @@ public class Produto {
         if (descricao.isEmpty()) {
             throw new IllegalArgumentException("Descricao Vazio");
         }
+        if (valor.isEmpty()) {
+            throw new IllegalArgumentException("Valor Vazio");
+        }
+        if (quantidadeEstoque <= 0) {
+            throw new IllegalArgumentException("Nescessario Quantidade ");
+        }
 
         this.nome = nome;
         this.tipo = tipo;

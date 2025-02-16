@@ -1,6 +1,7 @@
 package api.catalogo.produtos.application.gateways;
 
 import api.catalogo.produtos.domain.entity.Produto;
+import api.catalogo.produtos.infra.dto.ListaProdutoDTO;
 import api.catalogo.produtos.infra.dto.ProdutoDTO;
 
 import java.util.Collection;
@@ -22,10 +23,10 @@ public interface ProdutoGateway {
     void atualizarQuantidades(List<ProdutoDTO> produtos);
 
 
-
     Optional<Produto> buscarPorId(Long id);
 
     void atualizarProduto(Long id, Produto produto);
+
 
 
 }

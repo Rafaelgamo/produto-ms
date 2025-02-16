@@ -1,6 +1,5 @@
 package api.catalogo.produtos.infra.gateways;
 
-import api.catalogo.produtos.application.json.ProdutoProValorJson;
 import api.catalogo.produtos.domain.entity.Produto;
 import api.catalogo.produtos.infra.dto.ProdutoDTO;
 import api.catalogo.produtos.infra.persistence.ProdutoEntity;

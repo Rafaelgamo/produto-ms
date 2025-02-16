@@ -11,6 +11,8 @@ import java.util.Map;
 public interface PedidoProdutoGateway {
 
     void criarPedidoProduto(Long id, Long produtoId, Double quantidade);
+
+
 }
 
 
