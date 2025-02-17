@@ -1,10 +1,9 @@
 package api.catalogo.produtos.application.usecases;
 
 import api.catalogo.produtos.application.gateways.ProdutoGateway;
-import api.catalogo.produtos.domain.entity.Produto;
-import api.catalogo.produtos.infra.dto.ListaProdutoDTO;
-import api.catalogo.produtos.infra.persistence.ProdutoEntity;
+import api.catalogo.produtos.infra.dto.ProdutoDTO;
 
+import java.util.Collection;
 import java.util.List;
 
 public class BuscarProdutoUseCase {
@@ -15,12 +14,13 @@ public class BuscarProdutoUseCase {
         this.produtoGateway = produtoGateway;
     }
 
-    public List<Produto> listarProdutos() {
+    public List<ProdutoDTO> listarProdutos() {
         return this.produtoGateway.listarTodos();
     }
 
 
-
-
+    public List<ProdutoDTO> listarProdutos(Collection<Long> ids) {
+        return this.produtoGateway.listarPorIds(ids);
+    }
 }
 
