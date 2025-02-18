@@ -1,5 +1,6 @@
 package api.catalogo.produtos.config;
 
+import api.catalogo.produtos.application.usecases.ReservarEstoqueUseCase;
 import api.catalogo.produtos.infra.gateways.mensageria.mensagens.NovoPedidoMensagem;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,10 +15,19 @@ public class ConsumerConfig {
 
     private static final Logger log = LoggerFactory.getLogger(ConsumerConfig.class);
 
+    private final ReservarEstoqueUseCase reservarEstoqueUseCase;
+
+    public ConsumerConfig(ReservarEstoqueUseCase reservarEstoqueUseCase) {
+        this.reservarEstoqueUseCase = reservarEstoqueUseCase;
+    }
+
     @Bean
-    public Consumer<Message<NovoPedidoMensagem>> estoqueEntrypoint() {
+    public Consumer<Message<NovoPedidoMensagem>> novoPedidoEntrypoint() {
         return message -> {
-            log.info("ESTOQUE CONSUMIU: {}", message.toString());
+            log.info("NOVO PEDIDO RECEBIDO: {}", message.toString());
+
+            var novoPedido = message.getPayload();
+            reservarEstoqueUseCase.reservaEstoque(novoPedido.pedidoId(), novoPedido.itens());
         };
     }
 }

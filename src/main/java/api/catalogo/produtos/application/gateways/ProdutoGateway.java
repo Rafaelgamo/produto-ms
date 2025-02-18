@@ -19,13 +19,15 @@ public interface ProdutoGateway {
 
     List<ProdutoDTO> listarPorIds(Collection<Long> id);
 
-    void atualizarQuantidades(List<ProdutoDTO> produtos);
+    void salvarReservaEstoque(Long pedidoId, List<ProdutoDTO> produtos);
 
 
     Optional<Produto> buscarPorId(Long id);
 
     void atualizarProduto(Long id, Produto produto);
 
+
+    void notificarEstoqueInsuficiente(Long pedidoId);
 
 }
 

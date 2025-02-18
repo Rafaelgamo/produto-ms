@@ -7,13 +7,23 @@ import api.catalogo.produtos.application.usecases.*;
 import api.catalogo.produtos.infra.gateways.PedidoProdutoJpaGateway;
 import api.catalogo.produtos.infra.gateways.ProdutoEntityMapper;
 import api.catalogo.produtos.infra.gateways.ProdutoJpaGateway;
+import api.catalogo.produtos.infra.gateways.mensageria.dispatcher.EstoqueInsuficienteDispatcher;
+import api.catalogo.produtos.infra.gateways.mensageria.dispatcher.EstoqueInsuficienteStreamDispatcher;
+import api.catalogo.produtos.infra.gateways.mensageria.dispatcher.EstoqueReservadoStreamDispatcher;
 import api.catalogo.produtos.infra.persistence.PedidoProdutoRepository;
 import api.catalogo.produtos.infra.persistence.ProdutoRepository;
+import org.springframework.cloud.stream.function.StreamBridge;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class ProdutoConfig {
+
+    private final StreamBridge streamBridge;
+
+    public ProdutoConfig(StreamBridge streamBridge) {
+        this.streamBridge = streamBridge;
+    }
 
     @Bean
     CadastrarProdutoUseCase cadastrarProdutoUsesCase(ProdutoGateway produtoGateway) {
@@ -26,8 +36,8 @@ public class ProdutoConfig {
     }
 
     @Bean
-    BaixarEstoqueUseCase baixarEstoqueUseCase(ProdutoGateway produtoGateway, PedidoExternalGateway pedidoExternalGateway) {
-        return new BaixarEstoqueUseCase(produtoGateway, pedidoExternalGateway);
+    ReservarEstoqueUseCase reservarEstoqueUseCase(ProdutoGateway produtoGateway, PedidoExternalGateway pedidoExternalGateway){
+        return new ReservarEstoqueUseCase(produtoGateway, pedidoExternalGateway);
     }
 
     @Bean
@@ -47,8 +57,8 @@ public class ProdutoConfig {
     }
 
     @Bean
-    ProdutoGateway produtoGateway(ProdutoRepository produtoRepository, ProdutoEntityMapper produtoEntityMapper) {
-        return new ProdutoJpaGateway(produtoRepository, produtoEntityMapper);
+    ProdutoGateway produtoGateway(ProdutoRepository produtoRepository, EstoqueReservadoStreamDispatcher estoqueReservadoStreamDispatcher, EstoqueInsuficienteDispatcher estoqueInsuficienteDispatcher, ProdutoEntityMapper produtoEntityMapper){
+        return new ProdutoJpaGateway(produtoRepository, estoqueReservadoStreamDispatcher, estoqueInsuficienteDispatcher, produtoEntityMapper);
     }
 
     @Bean
@@ -56,4 +66,15 @@ public class ProdutoConfig {
         return new ProdutoEntityMapper();
     }
 
+    @Bean
+    EstoqueInsuficienteDispatcher estoqueInsuficienteDispatcher() {
+        return new EstoqueInsuficienteStreamDispatcher(streamBridge);
+    }
+
+    @Bean
+    EstoqueReservadoStreamDispatcher estoqueReservadoStreamDispatcher() {
+        return new EstoqueReservadoStreamDispatcher(streamBridge);
+    }
+
 }
+

@@ -3,6 +3,8 @@ package api.catalogo.produtos.infra.gateways;
 import api.catalogo.produtos.application.gateways.ProdutoGateway;
 import api.catalogo.produtos.domain.entity.Produto;
 import api.catalogo.produtos.infra.dto.ProdutoDTO;
+import api.catalogo.produtos.infra.gateways.mensageria.dispatcher.EstoqueInsuficienteDispatcher;
+import api.catalogo.produtos.infra.gateways.mensageria.dispatcher.EstoqueReservadoDispatcher;
 import api.catalogo.produtos.infra.persistence.ProdutoEntity;
 import api.catalogo.produtos.infra.persistence.ProdutoRepository;
 
@@ -14,12 +16,16 @@ import java.util.stream.Collectors;
 public class ProdutoJpaGateway implements ProdutoGateway {
 
     private final ProdutoRepository produtoRepository;
+    private final EstoqueReservadoDispatcher estoqueReservadoDispatcher;
+    private final EstoqueInsuficienteDispatcher estoqueInsuficienteDispatcher;
+
     private final ProdutoEntityMapper produtoEntityMapper;
 
-    public ProdutoJpaGateway(ProdutoRepository produtoRepository, ProdutoEntityMapper produtoEntityMapper) {
+    public ProdutoJpaGateway(ProdutoRepository produtoRepository, EstoqueReservadoDispatcher estoqueReservadoDispatcher, EstoqueInsuficienteDispatcher estoqueInsuficienteDispatcher, ProdutoEntityMapper produtoEntityMapper) {
         this.produtoRepository = produtoRepository;
+        this.estoqueReservadoDispatcher = estoqueReservadoDispatcher;
+        this.estoqueInsuficienteDispatcher = estoqueInsuficienteDispatcher;
         this.produtoEntityMapper = produtoEntityMapper;
-
     }
 
     @Override
@@ -52,16 +58,15 @@ public class ProdutoJpaGateway implements ProdutoGateway {
                 .collect(Collectors.toList());
     }
 
-
     @Override
-    public void atualizarQuantidades(List<ProdutoDTO> produtos) {
+    public void salvarReservaEstoque(Long pedidoId, List<ProdutoDTO> produtos) {
         var produtoEntitys = produtos.stream()
                 .map(produtoEntityMapper::toEntity)
                 .collect(Collectors.toList());
 
         produtoRepository.saveAll(produtoEntitys);
+        estoqueReservadoDispatcher.enviar(pedidoId);
     }
-
 
     @Override
     public Optional<Produto> buscarPorId(Long id) {
@@ -76,17 +81,22 @@ public class ProdutoJpaGateway implements ProdutoGateway {
     @Override
     public void atualizarProduto(Long id, Produto produto) {
         var entidade = produtoRepository.findById(id).orElse(null);
-        if (entidade == null) {
+        if(entidade == null){
             return;
         }
-        if (produto.getNome() != null) entidade.setNome(produto.getNome());
-        if (produto.getTipo() != null) entidade.setTipo(produto.getTipo());
-        if (produto.getDescricao() != null) entidade.setDescricao(produto.getDescricao());
-        if (produto.getValor() != null) entidade.setValor(produto.getValor());
-        if (produto.getQuantidadeEstoque() != null) entidade.setQuantidadeEstoque(produto.getQuantidadeEstoque());
+
+        if(produto.getNome() != null)               entidade.setNome(produto.getNome());
+        if(produto.getTipo() != null)               entidade.setTipo(produto.getTipo());
+        if(produto.getDescricao() != null)          entidade.setDescricao(produto.getDescricao());
+        if(produto.getValor() != null)              entidade.setValor(produto.getValor());
+        if(produto.getQuantidadeEstoque() != null)  entidade.setQuantidadeEstoque(produto.getQuantidadeEstoque());
 
         produtoRepository.save(entidade);
     }
 
+    @Override
+    public void notificarEstoqueInsuficiente(Long pedidoId) {
+        estoqueInsuficienteDispatcher.enviar(pedidoId);
+    }
 }
 

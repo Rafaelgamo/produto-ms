@@ -12,7 +12,7 @@ public class ImportacaoMapper implements FieldSetMapper<ProdutoEntity> {
     //private DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("YYYY-MM-dd HH:mm:ss");
 
     @Override
-    public ProdutoEntity mapFieldSet(FieldSet fieldSet) throws BindException {
+    public ProdutoEntity mapFieldSet(FieldSet fieldSet) {
         ProdutoEntity produto = new ProdutoEntity();
         produto.setNome(fieldSet.readString("nome"));
         produto.setTipo(fieldSet.readString("tipo"));
