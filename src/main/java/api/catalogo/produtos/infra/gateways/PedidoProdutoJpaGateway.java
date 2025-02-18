@@ -18,7 +18,7 @@ public class PedidoProdutoJpaGateway implements PedidoProdutoGateway {
     public void criarPedidoProduto(Long id, Long produtoId, Double quantidade) {
         var pedido = new PedidoExternalEntity(id);
         var produto = new ProdutoEntity(produtoId);
-        var pedidoProduto = new PedidoProdutoEntity(null, pedido, produto, quantidade );
+        var pedidoProduto = new PedidoProdutoEntity(null, pedido, produto, quantidade);
 
         pedidoProdutoRepository.save(pedidoProduto);
     }

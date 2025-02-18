@@ -19,7 +19,7 @@ public class AlterarProdutoUseCase {
     public void alterarProduto(Long id, AlteraProdutoDTO data) {
         Optional<Produto> optionalProduct = produtoGateway.buscarPorId(id);
         if (optionalProduct.isPresent()) {
-            var produto =  optionalProduct.get();
+            var produto = optionalProduct.get();
             produto.setNome(data.nome());
             produto.setTipo(data.tipo());
             produto.setDescricao(data.descricao());

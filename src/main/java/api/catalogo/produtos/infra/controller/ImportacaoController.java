@@ -1,5 +1,6 @@
 package api.catalogo.produtos.infra.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.JobParameters;
 import org.springframework.batch.core.JobParametersInvalidException;
@@ -20,6 +21,7 @@ public class ImportacaoController {
     @Autowired
     private Job job;
 
+    @Operation(description = "importação da pasta files")
     @GetMapping("/importar")
     public void importaArquivo() throws JobInstanceAlreadyCompleteException, JobExecutionAlreadyRunningException, JobParametersInvalidException, JobRestartException {
         JobParameters jobParameters = new JobParameters();

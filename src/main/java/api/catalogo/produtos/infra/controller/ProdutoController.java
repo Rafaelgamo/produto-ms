@@ -41,8 +41,6 @@ public class ProdutoController {
         this.cadastrarProdutoUseCase = cadastrarProdutoUseCase;
         this.buscarProdutoUseCase = buscarProdutoUseCase;
         this.excluirProdutoUseCase = excluirProdutoUseCase;
-
-
         this.alterarProdutoUseCase = alterarProdutoUseCase;
     }
 
@@ -69,8 +67,9 @@ public class ProdutoController {
 
 
     @DeleteMapping("/{id}")
-    public void excluirProduto(@PathVariable Long id) {
+    public ResponseEntity<ProdutoDTO> excluirProduto(@PathVariable Long id) {
         excluirProdutoUseCase.excluirProduto(id);
+        return ResponseEntity.noContent().build();
     }
 
 

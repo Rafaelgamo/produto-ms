@@ -7,11 +7,11 @@ public class CadastrarProdutoUseCase {
 
     private final ProdutoGateway produtoGateway;
 
-    public CadastrarProdutoUseCase(ProdutoGateway produtoGateway){
+    public CadastrarProdutoUseCase(ProdutoGateway produtoGateway) {
         this.produtoGateway = produtoGateway;
     }
 
-    public Produto cadastratProduto(Produto produto){
+    public Produto cadastratProduto(Produto produto) {
         return produtoGateway.cadastrarProduto(produto);
     }
 

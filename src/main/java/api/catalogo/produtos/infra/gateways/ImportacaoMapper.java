@@ -4,6 +4,7 @@ import api.catalogo.produtos.infra.persistence.ProdutoEntity;
 import org.springframework.batch.item.file.mapping.FieldSetMapper;
 import org.springframework.batch.item.file.transform.FieldSet;
 import org.springframework.validation.BindException;
+
 import java.time.LocalDateTime;
 
 public class ImportacaoMapper implements FieldSetMapper<ProdutoEntity> {
@@ -20,6 +21,6 @@ public class ImportacaoMapper implements FieldSetMapper<ProdutoEntity> {
         produto.setQuantidadeEstoque(fieldSet.readDouble("quantidadeEstoque"));
         produto.setQuantidadeReservada(fieldSet.readDouble("quantidadeReservada"));
         produto.setHoraImportacao(LocalDateTime.now());
-       return produto;
+        return produto;
     }
 }

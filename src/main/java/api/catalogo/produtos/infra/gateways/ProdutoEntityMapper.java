@@ -6,7 +6,7 @@ import api.catalogo.produtos.infra.persistence.ProdutoEntity;
 
 public class ProdutoEntityMapper {
 
-    public ProdutoEntity toEntity(Produto produto){
+    public ProdutoEntity toEntity(Produto produto) {
         return new ProdutoEntity(
                 produto.getNome(),
                 produto.getTipo(),
@@ -20,16 +20,16 @@ public class ProdutoEntityMapper {
         );
     }
 
-    public Produto toDomain(ProdutoEntity produtoEntity){
-       return new Produto(
-               produtoEntity.getNome(),
-               produtoEntity.getTipo(),
-               produtoEntity.getDescricao(),
-               produtoEntity.getValor(),
-               produtoEntity.getQuantidadeEstoque(),
-               produtoEntity.getQuantidadeReservada(),
-               produtoEntity.getHoraImportacao()
-       );
+    public Produto toDomain(ProdutoEntity produtoEntity) {
+        return new Produto(
+                produtoEntity.getNome(),
+                produtoEntity.getTipo(),
+                produtoEntity.getDescricao(),
+                produtoEntity.getValor(),
+                produtoEntity.getQuantidadeEstoque(),
+                produtoEntity.getQuantidadeReservada(),
+                produtoEntity.getHoraImportacao()
+        );
 
     }
 
@@ -46,7 +46,7 @@ public class ProdutoEntityMapper {
         );
     }
 
-    public ProdutoEntity toEntity(ProdutoDTO produtoDTO){
+    public ProdutoEntity toEntity(ProdutoDTO produtoDTO) {
         return new ProdutoEntity(
                 produtoDTO.getId(),
                 produtoDTO.getNome(),
@@ -60,7 +60,6 @@ public class ProdutoEntityMapper {
 
         );
     }
-
 
 
 }

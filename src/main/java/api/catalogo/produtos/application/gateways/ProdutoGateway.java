@@ -27,7 +27,6 @@ public interface ProdutoGateway {
     void atualizarProduto(Long id, Produto produto);
 
 
-
 }
 
 

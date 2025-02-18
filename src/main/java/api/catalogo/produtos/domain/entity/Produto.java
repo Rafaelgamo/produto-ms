@@ -27,7 +27,7 @@ public class Produto {
         if (valor.isEmpty()) {
             throw new IllegalArgumentException("Valor Vazio");
         }
-        if (quantidadeEstoque <= 0) {
+        if (quantidadeEstoque <= 0.0) {
             throw new IllegalArgumentException("Nescessario Quantidade ");
         }
 
@@ -40,28 +40,61 @@ public class Produto {
         this.horaImportacao = horaImportacao;
     }
 
+    public String getNome() {
+        return nome;
+    }
 
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
 
-    public String getNome() {return nome;}
-    public void setNome(String nome) {this.nome = nome;}
+    public String getTipo() {
+        return tipo;
+    }
 
-    public String getTipo() {return tipo;}
-    public void setTipo(String tipo) {this.tipo = tipo;}
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
 
-    public String getValor() {return valor;}
-    public void setValor(String valor) {this.valor = valor;}
+    public String getValor() {
+        return valor;
+    }
 
-    public String getDescricao() {return descricao;}
-    public void setDescricao(String descricao) {this.descricao = descricao;}
+    public void setValor(String valor) {
+        this.valor = valor;
+    }
 
-    public Double getQuantidadeEstoque() {return quantidadeEstoque;}
-    public void setQuantidadeEstoque(Double quantidadeEstoque) {this.quantidadeEstoque = quantidadeEstoque;}
+    public String getDescricao() {
+        return descricao;
+    }
 
-    public Double getQuantidadeReservada() {return quantidadeReservada;}
-    public void setQuantidadeReservada(Double quantidadeReservada) {this.quantidadeReservada = quantidadeReservada;}
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
 
-    public LocalDateTime getHoraImportacao() {return horaImportacao;}
-    public void setHoraImportacao(LocalDateTime horaImportacao) {this.horaImportacao = horaImportacao;}
+    public Double getQuantidadeEstoque() {
+        return quantidadeEstoque;
+    }
+
+    public void setQuantidadeEstoque(Double quantidadeEstoque) {
+        this.quantidadeEstoque = quantidadeEstoque;
+    }
+
+    public Double getQuantidadeReservada() {
+        return quantidadeReservada;
+    }
+
+    public void setQuantidadeReservada(Double quantidadeReservada) {
+        this.quantidadeReservada = quantidadeReservada;
+    }
+
+    public LocalDateTime getHoraImportacao() {
+        return horaImportacao;
+    }
+
+    public void setHoraImportacao(LocalDateTime horaImportacao) {
+        this.horaImportacao = horaImportacao;
+    }
 
 
 }

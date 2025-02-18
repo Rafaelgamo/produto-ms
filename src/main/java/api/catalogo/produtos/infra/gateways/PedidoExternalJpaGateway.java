@@ -29,7 +29,7 @@ public class PedidoExternalJpaGateway implements PedidoExternalGateway {
         var pedido = new PedidoExternalEntity(pedidoid);
         pedidoExternalRepository.save(pedido);
 
-        for(var quantidadeItem : quantidades.entrySet()){
+        for (var quantidadeItem : quantidades.entrySet()) {
             var produtoId = quantidadeItem.getKey();
             var quanidade = quantidadeItem.getValue();
 

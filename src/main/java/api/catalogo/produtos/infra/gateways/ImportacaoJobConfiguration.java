@@ -28,7 +28,7 @@ public class ImportacaoJobConfiguration {
     private PlatformTransactionManager transactionManager;
 
     @Bean
-    public Job job(Step passoInicial, JobRepository jobRepository){
+    public Job job(Step passoInicial, JobRepository jobRepository) {
         return new JobBuilder("gerar-produtos", jobRepository)
                 .start(passoInicial)
                 .incrementer(new RunIdIncrementer())
@@ -36,33 +36,33 @@ public class ImportacaoJobConfiguration {
     }
 
     @Bean
-    public Step passoInicial(ItemReader<ProdutoEntity> reader, ItemWriter<ProdutoEntity> writer, JobRepository jobRepository){
+    public Step passoInicial(ItemReader<ProdutoEntity> reader, ItemWriter<ProdutoEntity> writer, JobRepository jobRepository) {
         return new StepBuilder("passo-inicial", jobRepository)
-                .<ProdutoEntity, ProdutoEntity>chunk(100,transactionManager)
+                .<ProdutoEntity, ProdutoEntity>chunk(100, transactionManager)
                 .reader(reader)
                 .writer(writer)
                 .build();
     }
 
     @Bean
-    public ItemReader<ProdutoEntity> reader(){
+    public ItemReader<ProdutoEntity> reader() {
         return new FlatFileItemReaderBuilder<ProdutoEntity>()
                 .name("leitura-csv")
                 .resource(new FileSystemResource("files/catalogo.csv"))
                 .comments("--")
                 .delimited()
                 .delimiter(";")
-                .names("nome","tipo","descricao","valor", "quantidadeEstoque","quantidadeReservada", "horaImportacao")
+                .names("nome", "tipo", "descricao", "valor", "quantidadeEstoque", "quantidadeReservada", "horaImportacao")
                 .fieldSetMapper(new ImportacaoMapper())
                 .build();
     }
 
     @Bean
-    public ItemWriter<ProdutoEntity> writer(DataSource dataSource){
+    public ItemWriter<ProdutoEntity> writer(DataSource dataSource) {
         return new JdbcBatchItemWriterBuilder<ProdutoEntity>()
                 .dataSource(dataSource)
                 .sql("INSERT INTO produto (nome, tipo, descricao, valor, quantidade_estoque, quantidade_reservada, hora_importacao) VALUES" +
-                   "(:nome, :tipo, :descricao, :valor, :quantidadeEstoque, :quantidadeReservada , :horaImportacao)"
+                        "(:nome, :tipo, :descricao, :valor, :quantidadeEstoque, :quantidadeReservada , :horaImportacao)"
                 )
                 .itemSqlParameterSourceProvider(new BeanPropertyItemSqlParameterSourceProvider<>())
                 .build();

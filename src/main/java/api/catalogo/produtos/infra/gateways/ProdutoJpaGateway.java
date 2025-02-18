@@ -63,11 +63,10 @@ public class ProdutoJpaGateway implements ProdutoGateway {
     }
 
 
-
     @Override
     public Optional<Produto> buscarPorId(Long id) {
         var entidade = produtoRepository.findById(id).orElse(null);
-        if(entidade == null){
+        if (entidade == null) {
             return Optional.empty();
         }
 
@@ -77,14 +76,14 @@ public class ProdutoJpaGateway implements ProdutoGateway {
     @Override
     public void atualizarProduto(Long id, Produto produto) {
         var entidade = produtoRepository.findById(id).orElse(null);
-        if(entidade == null){
-            return ;
+        if (entidade == null) {
+            return;
         }
-        if(produto.getNome() != null) entidade.setNome(produto.getNome());
-        if(produto.getTipo() != null)entidade.setTipo(produto.getTipo());
-        if(produto.getDescricao() != null)entidade.setDescricao(produto.getDescricao());
-        if(produto.getValor() != null)entidade.setValor(produto.getValor());
-        if(produto.getQuantidadeEstoque() != null)entidade.setQuantidadeEstoque(produto.getQuantidadeEstoque());
+        if (produto.getNome() != null) entidade.setNome(produto.getNome());
+        if (produto.getTipo() != null) entidade.setTipo(produto.getTipo());
+        if (produto.getDescricao() != null) entidade.setDescricao(produto.getDescricao());
+        if (produto.getValor() != null) entidade.setValor(produto.getValor());
+        if (produto.getQuantidadeEstoque() != null) entidade.setQuantidadeEstoque(produto.getQuantidadeEstoque());
 
         produtoRepository.save(entidade);
     }

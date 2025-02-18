@@ -23,25 +23,56 @@ public class ProdutoDTO {
         this.horaImportacao = horaImportacao;
     }
 
-    public Long getId() {return id;}
-    public void setId(Long id) {this.id = id;}
+    public Long getId() {
+        return id;
+    }
 
-    public String getNome() {return nome;}
-    public void setNome(String nome) {this.nome = nome;}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-    public String getTipo() {return tipo;}
+    public String getNome() {
+        return nome;
+    }
 
-    public String getDescricao() {return descricao;}
-    public void setDescricao(String descricao) {this.descricao = descricao;}
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
 
-    public String getValor() {return valor;}
+    public String getTipo() {
+        return tipo;
+    }
 
-    public Double getQuantidadeEstoque() {return quantidadeEstoque;}
-    public void setQuantidadeEstoque(Double quantidadeEstoque) {this.quantidadeEstoque = quantidadeEstoque;}
+    public String getDescricao() {
+        return descricao;
+    }
 
-    public Double getQuantidadeReservada() {return quantidadeReservada;}
-    public void setQuantidadeReservada(Double quantidadeReservada) {this.quantidadeReservada = quantidadeReservada;}
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
 
-    public LocalDateTime getHoraImportacao() {return horaImportacao;}
+    public String getValor() {
+        return valor;
+    }
+
+    public Double getQuantidadeEstoque() {
+        return quantidadeEstoque;
+    }
+
+    public void setQuantidadeEstoque(Double quantidadeEstoque) {
+        this.quantidadeEstoque = quantidadeEstoque;
+    }
+
+    public Double getQuantidadeReservada() {
+        return quantidadeReservada;
+    }
+
+    public void setQuantidadeReservada(Double quantidadeReservada) {
+        this.quantidadeReservada = quantidadeReservada;
+    }
+
+    public LocalDateTime getHoraImportacao() {
+        return horaImportacao;
+    }
 
 }

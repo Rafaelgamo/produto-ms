@@ -11,7 +11,7 @@ public class PedidoProdutoEntity {
     private Long id;
 
     @ManyToOne(targetEntity = PedidoExternalEntity.class)
-    @JoinColumn(name = "pedido_id",referencedColumnName = "id")
+    @JoinColumn(name = "pedido_id", referencedColumnName = "id")
     private PedidoExternalEntity pedido;
 
     @ManyToOne(targetEntity = ProdutoEntity.class)
@@ -20,7 +20,8 @@ public class PedidoProdutoEntity {
 
     private Double quantidade;
 
-    public PedidoProdutoEntity() {}
+    public PedidoProdutoEntity() {
+    }
 
     public PedidoProdutoEntity(Long id, PedidoExternalEntity pedido, ProdutoEntity produto, Double quantidade) {
         this.id = id;
@@ -29,17 +30,35 @@ public class PedidoProdutoEntity {
         this.quantidade = quantidade;
     }
 
-    public Long getId() {return id;}
+    public Long getId() {
+        return id;
+    }
 
-    public void setId(Long id) {this.id = id;}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-    public PedidoExternalEntity getPedido() {return pedido;}
-    public void setPedido(PedidoExternalEntity pedido) {this.pedido = pedido;}
+    public PedidoExternalEntity getPedido() {
+        return pedido;
+    }
 
-    public ProdutoEntity getProduto() {return produto;}
+    public void setPedido(PedidoExternalEntity pedido) {
+        this.pedido = pedido;
+    }
 
-    public void setProduto(ProdutoEntity produto) {this.produto = produto;}
+    public ProdutoEntity getProduto() {
+        return produto;
+    }
 
-    public Double getQuantidade() {return quantidade;}
-    public void setQuantidade(Double quantidade) {this.quantidade = quantidade;}
+    public void setProduto(ProdutoEntity produto) {
+        this.produto = produto;
+    }
+
+    public Double getQuantidade() {
+        return quantidade;
+    }
+
+    public void setQuantidade(Double quantidade) {
+        this.quantidade = quantidade;
+    }
 }

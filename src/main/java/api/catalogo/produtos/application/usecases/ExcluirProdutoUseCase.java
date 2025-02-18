@@ -6,9 +6,11 @@ public class ExcluirProdutoUseCase {
 
     private ProdutoGateway produtoGateway;
 
-    public ExcluirProdutoUseCase(ProdutoGateway produtoGateway){
+    public ExcluirProdutoUseCase(ProdutoGateway produtoGateway) {
         this.produtoGateway = produtoGateway;
     }
 
-    public void excluirProduto(Long id){ produtoGateway.excluirProduto(id);}
+    public void excluirProduto(Long id) {
+        produtoGateway.excluirProduto(id);
+    }
 }

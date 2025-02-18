@@ -16,44 +16,44 @@ import org.springframework.context.annotation.Configuration;
 public class ProdutoConfig {
 
     @Bean
-    CadastrarProdutoUseCase cadastrarProdutoUsesCase(ProdutoGateway produtoGateway){
+    CadastrarProdutoUseCase cadastrarProdutoUsesCase(ProdutoGateway produtoGateway) {
         return new CadastrarProdutoUseCase(produtoGateway);
     }
 
     @Bean
-    BuscarProdutoUseCase buscarProdutoUseCase(ProdutoGateway produtoGateway){
+    BuscarProdutoUseCase buscarProdutoUseCase(ProdutoGateway produtoGateway) {
         return new BuscarProdutoUseCase(produtoGateway);
     }
 
     @Bean
-    BaixarEstoqueUseCase baixarEstoqueUseCase(ProdutoGateway produtoGateway, PedidoExternalGateway pedidoExternalGateway){
+    BaixarEstoqueUseCase baixarEstoqueUseCase(ProdutoGateway produtoGateway, PedidoExternalGateway pedidoExternalGateway) {
         return new BaixarEstoqueUseCase(produtoGateway, pedidoExternalGateway);
     }
 
     @Bean
-    AlterarProdutoUseCase alterarProdutoUseCase(ProdutoGateway produtoGateway){
+    AlterarProdutoUseCase alterarProdutoUseCase(ProdutoGateway produtoGateway) {
         return new AlterarProdutoUseCase(produtoGateway);
     }
 
     @Bean
-    ExcluirProdutoUseCase excluirProdutoUseCase(ProdutoGateway produtoGateway){
+    ExcluirProdutoUseCase excluirProdutoUseCase(ProdutoGateway produtoGateway) {
         return new ExcluirProdutoUseCase(produtoGateway);
     }
 
 
     @Bean
-    PedidoProdutoGateway pedidoProdutoGateway(PedidoProdutoRepository pedidoProdutoRepository){
+    PedidoProdutoGateway pedidoProdutoGateway(PedidoProdutoRepository pedidoProdutoRepository) {
         return new PedidoProdutoJpaGateway(pedidoProdutoRepository);
     }
 
     @Bean
-    ProdutoGateway produtoGateway(ProdutoRepository produtoRepository, ProdutoEntityMapper produtoEntityMapper){
+    ProdutoGateway produtoGateway(ProdutoRepository produtoRepository, ProdutoEntityMapper produtoEntityMapper) {
         return new ProdutoJpaGateway(produtoRepository, produtoEntityMapper);
     }
 
     @Bean
-    ProdutoEntityMapper produtoEntityMapper(){
+    ProdutoEntityMapper produtoEntityMapper() {
         return new ProdutoEntityMapper();
     }
 
-    }
+}
