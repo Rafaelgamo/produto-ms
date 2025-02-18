@@ -1,28 +1,32 @@
 package api.catalogo.produtos.infra.controller;
 
 
-import api.catalogo.produtos.application.usecases.*;
+import api.catalogo.produtos.application.usecases.AlterarProdutoUseCase;
+import api.catalogo.produtos.application.usecases.BuscarProdutoUseCase;
+import api.catalogo.produtos.application.usecases.CadastrarProdutoUseCase;
+import api.catalogo.produtos.application.usecases.ExcluirProdutoUseCase;
 import api.catalogo.produtos.domain.entity.Produto;
 import api.catalogo.produtos.infra.dto.AlteraProdutoDTO;
-import api.catalogo.produtos.infra.dto.ListaProdutoDTO;
 import api.catalogo.produtos.infra.dto.ProdutoDTO;
-import api.catalogo.produtos.infra.persistence.ProdutoRepository;
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/produto")
 public class ProdutoController {
-
-    @Autowired
-    private ProdutoRepository produtoRepository;
 
     private final CadastrarProdutoUseCase cadastrarProdutoUseCase;
     private final BuscarProdutoUseCase buscarProdutoUseCase;
@@ -53,10 +57,14 @@ public class ProdutoController {
 
 
     @GetMapping
-    public List<ProdutoDTO> listarPedidos() {
-        return buscarProdutoUseCase.listarProdutos().stream()
-                .map(p -> new ProdutoDTO(null, p.getNome(), p.getTipo(), p.getDescricao(), p.getValor(), p.getQuantidadeEstoque(), p.getQuantidadeReservada(), LocalDateTime.now()))
-                .collect(Collectors.toList());
+    public ResponseEntity<List<ProdutoDTO>> listarProdutos(@RequestParam(required = false) Long[] ids) {
+        if (ids == null || ids.length == 0) {
+             var todos = buscarProdutoUseCase.listarProdutos();
+             return ResponseEntity.ok(todos);
+        } else {
+            var filtrados = buscarProdutoUseCase.listarProdutos(List.of(ids));
+            return ResponseEntity.ok(filtrados);
+        }
     }
 
 
@@ -68,9 +76,9 @@ public class ProdutoController {
 
     @PutMapping("/{id}")
     @Transactional
-    public ResponseEntity alterarProduto(@PathVariable Long id, @RequestBody @Valid AlteraProdutoDTO data) {
+    public ResponseEntity<Void> alterarProduto(@PathVariable Long id, @RequestBody @Valid AlteraProdutoDTO data) {
         alterarProdutoUseCase.alterarProduto(id, data);
-        return null;
+        return ResponseEntity.noContent().build();
     }
 
 

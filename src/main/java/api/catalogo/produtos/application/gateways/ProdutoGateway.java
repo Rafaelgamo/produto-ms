@@ -1,7 +1,6 @@
 package api.catalogo.produtos.application.gateways;
 
 import api.catalogo.produtos.domain.entity.Produto;
-import api.catalogo.produtos.infra.dto.ListaProdutoDTO;
 import api.catalogo.produtos.infra.dto.ProdutoDTO;
 
 import java.util.Collection;
@@ -13,7 +12,7 @@ public interface ProdutoGateway {
 
     Produto cadastrarProduto(Produto produto);
 
-    List<Produto> listarTodos();
+    List<ProdutoDTO> listarTodos();
 
 
     void excluirProduto(Long id);

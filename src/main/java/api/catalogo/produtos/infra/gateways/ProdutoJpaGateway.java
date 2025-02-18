@@ -2,13 +2,10 @@ package api.catalogo.produtos.infra.gateways;
 
 import api.catalogo.produtos.application.gateways.ProdutoGateway;
 import api.catalogo.produtos.domain.entity.Produto;
-import api.catalogo.produtos.infra.dto.ListaProdutoDTO;
 import api.catalogo.produtos.infra.dto.ProdutoDTO;
 import api.catalogo.produtos.infra.persistence.ProdutoEntity;
 import api.catalogo.produtos.infra.persistence.ProdutoRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
@@ -29,14 +26,14 @@ public class ProdutoJpaGateway implements ProdutoGateway {
     public Produto cadastrarProduto(Produto produto) {
         ProdutoEntity entity = produtoEntityMapper.toEntity(produto);
         produtoRepository.save(entity);
-        Produto produtoSolavo = produtoEntityMapper.toDomain(entity);
-        return produtoSolavo;
+        Produto produtoSalvo = produtoEntityMapper.toDomain(entity);
+        return produtoSalvo;
     }
 
     @Override
-    public List<Produto> listarTodos() {
+    public List<ProdutoDTO> listarTodos() {
         return produtoRepository.findAll().stream()
-                .map(produtoEntityMapper::toDomain)
+                .map(produtoEntityMapper::toDTO)
                 .collect(Collectors.toList());
     }
 
