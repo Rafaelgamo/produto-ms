@@ -9,6 +9,7 @@ import api.catalogo.produtos.domain.entity.Produto;
 import api.catalogo.produtos.infra.dto.AlteraProdutoDTO;
 import api.catalogo.produtos.infra.dto.ProdutoDTO;
 import jakarta.validation.Valid;
+import org.hibernate.sql.results.graph.basic.CoercingResultAssembler;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -45,20 +46,19 @@ public class ProdutoController {
     }
 
     @PostMapping
-    public ProdutoDTO cadastrarProduto(@RequestBody ProdutoDTO produtoDto) {
+    public  ResponseEntity<ProdutoDTO> cadastrarProduto(@RequestBody ProdutoDTO produtoDto) {
         Produto produtoSalvo = cadastrarProdutoUseCase.cadastratProduto(new Produto(produtoDto.getNome(), produtoDto.getTipo(),
                 produtoDto.getDescricao(), produtoDto.getValor(), produtoDto.getQuantidadeEstoque(), produtoDto.getQuantidadeReservada(), LocalDateTime.now()));
+        return ResponseEntity.ok(produtoDto);
 
-        return new ProdutoDTO(null, produtoSalvo.getNome(), produtoSalvo.getTipo(), produtoSalvo.getDescricao(),
-                produtoSalvo.getValor(), produtoSalvo.getQuantidadeEstoque(), produtoSalvo.getQuantidadeReservada(), LocalDateTime.now());
     }
 
 
     @GetMapping
     public ResponseEntity<List<ProdutoDTO>> listarProdutos(@RequestParam(required = false) Long[] ids) {
         if (ids == null || ids.length == 0) {
-             var todos = buscarProdutoUseCase.listarProdutos();
-             return ResponseEntity.ok(todos);
+            var todos = buscarProdutoUseCase.listarProdutos();
+            return ResponseEntity.ok(todos);
         } else {
             var filtrados = buscarProdutoUseCase.listarProdutos(List.of(ids));
             return ResponseEntity.ok(filtrados);
@@ -79,8 +79,6 @@ public class ProdutoController {
         alterarProdutoUseCase.alterarProduto(id, data);
         return ResponseEntity.noContent().build();
     }
-
-
 
 
 }

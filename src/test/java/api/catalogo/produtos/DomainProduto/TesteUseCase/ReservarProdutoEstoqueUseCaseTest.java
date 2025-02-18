@@ -1,4 +1,4 @@
 package api.catalogo.produtos.DomainProduto.TesteUseCase;
 
-public class BaixarEstoqueUseCaseTest {
+public class ReservarProdutoEstoqueUseCaseTest {
 }
