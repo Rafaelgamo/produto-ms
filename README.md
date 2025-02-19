@@ -3,7 +3,7 @@
 ### Mensageria
 Este microsserviço escuta mensagens dos seguintes tópicos:
 * <code>novo-pedido-topic</code>
-* <code>novo-pedido-topic</code>
+* <code>entrega-concluida-topic</code>
 
 E produz mensagens para estes:
 * <code>estoque-insuficiente-topic</code>
