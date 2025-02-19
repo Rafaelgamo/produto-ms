@@ -5,30 +5,22 @@ import api.catalogo.produtos.application.usecases.AlterarProdutoUseCase;
 import api.catalogo.produtos.application.usecases.BuscarProdutoUseCase;
 import api.catalogo.produtos.application.usecases.CadastrarProdutoUseCase;
 import api.catalogo.produtos.application.usecases.ExcluirProdutoUseCase;
-import api.catalogo.produtos.domain.entity.Produto;
 import api.catalogo.produtos.infra.controller.ProdutoController;
 import api.catalogo.produtos.infra.dto.ProdutoDTO;
-import api.catalogo.produtos.infra.persistence.ProdutoEntity;
 import api.catalogo.produtos.infra.persistence.ProdutoRepository;
-import jakarta.websocket.server.PathParam;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.function.Executable;
 import org.mockito.Mockito;
-import org.mockito.Spy;
 import org.springframework.http.ResponseEntity;
-import reactor.core.publisher.Mono;
 
 import java.time.LocalDateTime;
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.*;
-import static org.springframework.http.HttpStatus.OK;
-import static reactor.core.publisher.Mono.when;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 
 
 public class BuscarProdutoUseCaseTest {

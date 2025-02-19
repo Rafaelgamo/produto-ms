@@ -1,8 +1,8 @@
 package api.catalogo.produtos.infra.persistence;
 
-import jakarta.persistence.*;
-
-import java.util.List;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 @Table(name = "pedido_external")
 @Entity

@@ -51,4 +51,7 @@ public class ReservarEstoqueUseCase {
         pedidoExternalGateway.cadastrarPedido(pedidoId, quantidades);
     }
 
+    public void descontarQuantidadeReservadaDosItensDoPedido(Long pedidoId) {
+        produtoGateway.descontarQuantidadeReservadaDosItensDoPedido(pedidoId);
+    }
 }

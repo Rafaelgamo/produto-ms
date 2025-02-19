@@ -1,4 +1,4 @@
-package api.catalogo.produtos.domain.entity;
+package api.catalogo.produtos.domain;
 
 import java.time.LocalDateTime;
 

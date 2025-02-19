@@ -1,7 +1,7 @@
 package api.catalogo.produtos.application.usecases;
 
 import api.catalogo.produtos.application.gateways.ProdutoGateway;
-import api.catalogo.produtos.domain.entity.Produto;
+import api.catalogo.produtos.domain.Produto;
 import api.catalogo.produtos.infra.dto.AlteraProdutoDTO;
 
 import java.util.NoSuchElementException;

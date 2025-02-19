@@ -1,6 +1,5 @@
 package api.catalogo.produtos.infra.gateways.mensageria.dispatcher;
 
-import api.catalogo.produtos.infra.gateways.mensageria.mensagens.NovoPedidoMensagem;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;

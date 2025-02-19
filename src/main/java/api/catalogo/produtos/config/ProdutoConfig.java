@@ -3,7 +3,11 @@ package api.catalogo.produtos.config;
 import api.catalogo.produtos.application.gateways.PedidoExternalGateway;
 import api.catalogo.produtos.application.gateways.PedidoProdutoGateway;
 import api.catalogo.produtos.application.gateways.ProdutoGateway;
-import api.catalogo.produtos.application.usecases.*;
+import api.catalogo.produtos.application.usecases.AlterarProdutoUseCase;
+import api.catalogo.produtos.application.usecases.BuscarProdutoUseCase;
+import api.catalogo.produtos.application.usecases.CadastrarProdutoUseCase;
+import api.catalogo.produtos.application.usecases.ExcluirProdutoUseCase;
+import api.catalogo.produtos.application.usecases.ReservarEstoqueUseCase;
 import api.catalogo.produtos.infra.gateways.PedidoProdutoJpaGateway;
 import api.catalogo.produtos.infra.gateways.ProdutoEntityMapper;
 import api.catalogo.produtos.infra.gateways.ProdutoJpaGateway;
@@ -57,8 +61,8 @@ public class ProdutoConfig {
     }
 
     @Bean
-    ProdutoGateway produtoGateway(ProdutoRepository produtoRepository, EstoqueReservadoStreamDispatcher estoqueReservadoStreamDispatcher, EstoqueInsuficienteDispatcher estoqueInsuficienteDispatcher, ProdutoEntityMapper produtoEntityMapper){
-        return new ProdutoJpaGateway(produtoRepository, estoqueReservadoStreamDispatcher, estoqueInsuficienteDispatcher, produtoEntityMapper);
+    ProdutoGateway produtoGateway(ProdutoRepository produtoRepository, PedidoProdutoRepository pedidoProdutoRepository, EstoqueReservadoStreamDispatcher estoqueReservadoStreamDispatcher, EstoqueInsuficienteDispatcher estoqueInsuficienteDispatcher, ProdutoEntityMapper produtoEntityMapper){
+        return new ProdutoJpaGateway(produtoRepository, pedidoProdutoRepository, estoqueReservadoStreamDispatcher, estoqueInsuficienteDispatcher, produtoEntityMapper);
     }
 
     @Bean

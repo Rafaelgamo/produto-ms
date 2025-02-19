@@ -1,6 +1,6 @@
 package api.catalogo.produtos.DomainProduto;
 
-import api.catalogo.produtos.domain.entity.Produto;
+import api.catalogo.produtos.domain.Produto;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

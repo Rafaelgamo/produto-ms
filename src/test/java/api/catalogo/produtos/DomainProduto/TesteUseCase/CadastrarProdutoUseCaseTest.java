@@ -5,22 +5,15 @@ import api.catalogo.produtos.application.usecases.AlterarProdutoUseCase;
 import api.catalogo.produtos.application.usecases.BuscarProdutoUseCase;
 import api.catalogo.produtos.application.usecases.CadastrarProdutoUseCase;
 import api.catalogo.produtos.application.usecases.ExcluirProdutoUseCase;
-import api.catalogo.produtos.domain.entity.Produto;
+import api.catalogo.produtos.domain.Produto;
 import api.catalogo.produtos.infra.controller.ProdutoController;
-import api.catalogo.produtos.infra.dto.AlteraProdutoDTO;
 import api.catalogo.produtos.infra.dto.ProdutoDTO;
-import api.catalogo.produtos.infra.gateways.ProdutoJpaGateway;
-import api.catalogo.produtos.infra.persistence.ProdutoRepository;
-import jakarta.validation.constraints.NotNull;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 

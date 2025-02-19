@@ -1,6 +1,6 @@
 package api.catalogo.produtos.application.gateways;
 
-import api.catalogo.produtos.domain.entity.Produto;
+import api.catalogo.produtos.domain.Produto;
 import api.catalogo.produtos.infra.dto.ProdutoDTO;
 
 import java.util.Collection;
@@ -21,6 +21,7 @@ public interface ProdutoGateway {
 
     void salvarReservaEstoque(Long pedidoId, List<ProdutoDTO> produtos);
 
+    void descontarQuantidadeReservadaDosItensDoPedido(Long pedidoId);
 
     Optional<Produto> buscarPorId(Long id);
 
@@ -28,7 +29,6 @@ public interface ProdutoGateway {
 
 
     void notificarEstoqueInsuficiente(Long pedidoId);
-
 }
 
 

@@ -3,7 +3,6 @@ package api.catalogo.produtos.infra.gateways;
 import api.catalogo.produtos.infra.persistence.ProdutoEntity;
 import org.springframework.batch.item.file.mapping.FieldSetMapper;
 import org.springframework.batch.item.file.transform.FieldSet;
-import org.springframework.validation.BindException;
 
 import java.time.LocalDateTime;
 

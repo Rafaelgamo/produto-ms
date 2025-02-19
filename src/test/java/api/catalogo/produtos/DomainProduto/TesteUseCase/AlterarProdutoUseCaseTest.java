@@ -5,23 +5,17 @@ import api.catalogo.produtos.application.usecases.AlterarProdutoUseCase;
 import api.catalogo.produtos.application.usecases.BuscarProdutoUseCase;
 import api.catalogo.produtos.application.usecases.CadastrarProdutoUseCase;
 import api.catalogo.produtos.application.usecases.ExcluirProdutoUseCase;
-import api.catalogo.produtos.domain.entity.Produto;
+import api.catalogo.produtos.domain.Produto;
 import api.catalogo.produtos.infra.controller.ProdutoController;
 import api.catalogo.produtos.infra.dto.AlteraProdutoDTO;
 import api.catalogo.produtos.infra.dto.ProdutoDTO;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
-import org.mockito.Mockito;
-import org.mockito.Spy;
 import org.springframework.http.ResponseEntity;
 
-import java.time.LocalDateTime;
-import java.util.List;
-import java.util.NoSuchElementException;
-
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.mock;
 
 public class AlterarProdutoUseCaseTest {
 
