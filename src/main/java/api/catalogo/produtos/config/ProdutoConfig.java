@@ -14,6 +14,7 @@ import api.catalogo.produtos.infra.gateways.ProdutoJpaGateway;
 import api.catalogo.produtos.infra.gateways.mensageria.dispatcher.EstoqueInsuficienteDispatcher;
 import api.catalogo.produtos.infra.gateways.mensageria.dispatcher.EstoqueInsuficienteStreamDispatcher;
 import api.catalogo.produtos.infra.gateways.mensageria.dispatcher.EstoqueReservadoStreamDispatcher;
+import api.catalogo.produtos.infra.persistence.PedidoExternalRepository;
 import api.catalogo.produtos.infra.persistence.PedidoProdutoRepository;
 import api.catalogo.produtos.infra.persistence.ProdutoRepository;
 import org.springframework.cloud.stream.function.StreamBridge;
@@ -56,8 +57,8 @@ public class ProdutoConfig {
 
 
     @Bean
-    PedidoProdutoGateway pedidoProdutoGateway(PedidoProdutoRepository pedidoProdutoRepository) {
-        return new PedidoProdutoJpaGateway(pedidoProdutoRepository);
+    PedidoProdutoGateway pedidoProdutoGateway(ProdutoRepository produtoRepository, PedidoProdutoRepository pedidoProdutoRepository, PedidoExternalRepository pedidoExternalRepository) {
+        return new PedidoProdutoJpaGateway(produtoRepository, pedidoProdutoRepository, pedidoExternalRepository);
     }
 
     @Bean

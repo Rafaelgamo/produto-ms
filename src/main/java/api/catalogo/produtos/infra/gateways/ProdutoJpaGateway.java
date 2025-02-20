@@ -11,6 +11,7 @@ import api.catalogo.produtos.infra.persistence.ProdutoEntity;
 import api.catalogo.produtos.infra.persistence.ProdutoRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collection;
 import java.util.List;
@@ -52,12 +53,14 @@ public class ProdutoJpaGateway implements ProdutoGateway {
 
 
     @Override
+    @Transactional("transactionManager")
     public void excluirProduto(Long id) {
         Optional<ProdutoEntity> entity = produtoRepository.findById(id);
         produtoRepository.deleteById(id);
     }
 
     @Override
+    @Transactional("transactionManager")
     public List<ProdutoDTO> listarPorIds(Collection<Long> ids) {
         var produtoEntitys = produtoRepository.findAllById(ids);
         return produtoEntitys.stream()
@@ -66,6 +69,7 @@ public class ProdutoJpaGateway implements ProdutoGateway {
     }
 
     @Override
+    @Transactional("transactionManager")
     public void salvarReservaEstoque(Long pedidoId, List<ProdutoDTO> produtos) {
         var produtoEntitys = produtos.stream()
                 .map(produtoEntityMapper::toEntity)
@@ -76,6 +80,7 @@ public class ProdutoJpaGateway implements ProdutoGateway {
     }
 
     @Override
+    @Transactional("transactionManager")
     public void descontarQuantidadeReservadaDosItensDoPedido(Long pedidoId) {
         var pedidoProdutos = pedidoProdutoRepository.findAllByPedido(pedidoId);
 

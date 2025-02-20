@@ -5,6 +5,7 @@ import api.catalogo.produtos.application.gateways.PedidoProdutoGateway;
 import api.catalogo.produtos.infra.persistence.PedidoExternalEntity;
 import api.catalogo.produtos.infra.persistence.PedidoExternalRepository;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Map;
 
@@ -20,14 +21,16 @@ public class PedidoExternalJpaGateway implements PedidoExternalGateway {
     }
 
     @Override
+    @Transactional("transactionManager")
     public PedidoExternalEntity buscarPorId(Long id) {
         return pedidoExternalRepository.findById(id).orElse(null);
     }
 
     @Override
+    @Transactional("transactionManager")
     public void cadastrarPedido(Long pedidoid, Map<Long, Double> quantidades) {
-        var pedido = new PedidoExternalEntity(pedidoid);
-        pedidoExternalRepository.save(pedido);
+//        var pedido = new PedidoExternalEntity(pedidoid);
+//        pedidoExternalRepository.save(pedido);
 
         for (var quantidadeItem : quantidades.entrySet()) {
             var produtoId = quantidadeItem.getKey();

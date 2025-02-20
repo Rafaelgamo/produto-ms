@@ -1,5 +1,6 @@
 package api.catalogo.produtos.infra.persistence;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -16,11 +17,11 @@ public class PedidoProdutoEntity {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @ManyToOne(targetEntity = PedidoExternalEntity.class)
+    @ManyToOne(targetEntity = PedidoExternalEntity.class, cascade= CascadeType.MERGE)
     @JoinColumn(name = "pedido_id", referencedColumnName = "id")
     private PedidoExternalEntity pedido;
 
-    @ManyToOne(targetEntity = ProdutoEntity.class)
+    @ManyToOne(targetEntity = ProdutoEntity.class, cascade= CascadeType.MERGE)
     @JoinColumn(name = "produto_id", referencedColumnName = "id")
     private ProdutoEntity produto;
 
