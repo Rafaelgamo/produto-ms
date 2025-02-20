@@ -41,7 +41,7 @@ public class AlterarProdutoUseCaseTest {
         this.produtoGateway = mock(ProdutoGateway.class);
 
 
-        alteraProdutoDTO = new AlteraProdutoDTO("Mesa", "Movel de Madeira", "largura x, Tamanho y", "100", 15.0);
+        alteraProdutoDTO = new AlteraProdutoDTO("", "", "largura x", "", 15.0);
     }
 
     @Test

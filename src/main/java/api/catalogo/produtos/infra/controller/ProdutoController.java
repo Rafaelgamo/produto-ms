@@ -24,6 +24,8 @@ import org.springframework.web.bind.annotation.RestController;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import static org.springframework.http.HttpStatus.CREATED;
+
 @RestController
 @RequestMapping("/produto")
 public class ProdutoController {
@@ -48,7 +50,7 @@ public class ProdutoController {
     public  ResponseEntity<ProdutoDTO> cadastrarProduto(@RequestBody ProdutoDTO produtoDto) {
         Produto produtoSalvo = cadastrarProdutoUseCase.cadastratProduto(new Produto(produtoDto.getNome(), produtoDto.getTipo(),
                 produtoDto.getDescricao(), produtoDto.getValor(), produtoDto.getQuantidadeEstoque(), produtoDto.getQuantidadeReservada(), LocalDateTime.now()));
-        return ResponseEntity.ok(produtoDto);
+        return ResponseEntity.status(CREATED).build();
 
     }
 
