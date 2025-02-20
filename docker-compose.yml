@@ -1,44 +1,64 @@
-  name: gerencie-service
+name: gerencie-service
 
-  volumes:
-    gerencie_db_data: {}
+volumes:
+  gerencie_db_data: {}
 
-  services:
+services:
+  api:
+    image: pedidos-service
+    environment:
+      GERENCIE_PROFILE: dev
+      GERENCIE_DB_USER: postgres
+      GERENCIE_DB_PASSWORD: postgres
+      GERENCIE_DB_HOST: postgresql://db
+      GERENCIE_DB_PORT: 5432
+      PORT: 8080
+    networks:
+      - gerencie-net
+    ports:
+      - "8080:8080"
+    depends_on:
+      - kafka
+      - db
 
-    kafka0:
-      image: "confluentinc/cp-enterprise-kafka:5.2.1"
-      ports:
-        - '9092:9092'
-        - '29094:29094'
-      depends_on:
-        - zookeeper
-      networks:
-        - pedidos-service-net
-      environment:
-        KAFKA_BROKER_ID: 0
-        KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
-        KAFKA_LISTENERS: INTERNAL://kafka0:29092,CONSUMER://kafka0:9092
-        KAFKA_ADVERTISED_LISTENERS: INTERNAL://kafka0:29092,CONSUMER://localhost:9092
-        KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: INTERNAL:PLAINTEXT,CONSUMER:PLAINTEXT,LISTENER_ALICE:PLAINTEXT
-        KAFKA_INTER_BROKER_LISTENER_NAME: INTERNAL
-        KAFKA_CONFLUENT_TOPIC_REPLICATION_FACTOR: 1
-        KAFKA_DEFAULT_REPLICATION_FACTOR: 1
-        KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
-      healthcheck:
-        test: kafka-topics.sh --list --bootstrap-server localhost:9092 || exit 1
-        interval: 3s
-        timeout: 30s
-        retries: 6
+  db:
+    image: postgres:17
+    volumes:
+      - gerencie_db_data:/var/lib/postgresql
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: produtosdb
+    networks:
+      - gerencie-net
+    expose:
+      - 5432
 
-    zookeeper:
-      image: 'bitnami/zookeeper:latest'
-      ports:
-        - '2181:2181'
-      networks:
-        - pedidos-service-net
-      environment:
-        - ALLOW_ANONYMOUS_LOGIN=yes
+  kafka:
+    image: 'bitnami/kafka:latest'
+    ports:
+      - '9092:9092'
+    environment:
+      - KAFKA_BROKER_ID=1
+      - KAFKA_LISTENERS=PLAINTEXT://:9092
+      - KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://127.0.0.1:9092
+      - KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181
+      - ALLOW_PLAINTEXT_LISTENER=yes
+    depends_on:
+      - zookeeper
+    healthcheck:
+      test: kafka-topics.sh --list --bootstrap-server localhost:9092 || exit 1
+      interval: 3s
+      timeout: 30s
+      retries: 6
+  zookeeper:
+    image: 'bitnami/zookeeper:latest'
+    ports:
+      - '2181:2181'
+    environment:
+      - ALLOW_ANONYMOUS_LOGIN=yes
 
-  networks:
-    pedidos-service-net:
-      driver: bridge
+networks:
+  gerencie-net:
+    driver: bridge

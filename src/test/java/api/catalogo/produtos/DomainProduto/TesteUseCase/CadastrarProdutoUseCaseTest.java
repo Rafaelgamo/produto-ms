@@ -10,12 +10,15 @@ import api.catalogo.produtos.infra.controller.ProdutoController;
 import api.catalogo.produtos.infra.dto.ProdutoDTO;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.http.ResponseEntity;
 
 import java.time.LocalDateTime;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
+import static org.springframework.http.HttpStatus.CREATED;
 
 public class CadastrarProdutoUseCaseTest {
 
@@ -45,7 +48,6 @@ public class CadastrarProdutoUseCaseTest {
         produto = new Produto("Mesa", "Movel de Madeira", "largura x, Tamanho y", "100", 15.0, 0.0, LocalDateTime.now());
         produtoDTO = new ProdutoDTO(1L,"Mesa", "Movel de Madeira", "largura x, Tamanho y", "100", 15.0, 0.0, LocalDateTime.now());
 
-
     }
 
     @Test
@@ -53,7 +55,7 @@ public class CadastrarProdutoUseCaseTest {
 
         var teste = assertDoesNotThrow(() -> produtoController.cadastrarProduto(produtoDTO));
         when(produtoGateway.cadastrarProduto(produto)).thenReturn(produto);
-      //  assertEquals(produtoDTO.getNome(), produto.getTipo().getNome());
+        assertEquals(ResponseEntity.status(CREATED).build(), teste);
     }
     
 }

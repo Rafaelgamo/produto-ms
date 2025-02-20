@@ -8,11 +8,14 @@ import api.catalogo.produtos.application.usecases.ExcluirProdutoUseCase;
 import api.catalogo.produtos.infra.controller.ProdutoController;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
+import static org.awaitility.Awaitility.given;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 import static org.springframework.http.HttpStatus.OK;
 
 public class ExcluirProdutoUseCaseTest {
@@ -41,5 +44,8 @@ public class ExcluirProdutoUseCaseTest {
     void excluirProduto() {
         var response = assertDoesNotThrow(() -> produtoController.excluirProduto(1L));
         assertEquals(ResponseEntity.noContent().build(), response);
+
+
     }
+
 }
