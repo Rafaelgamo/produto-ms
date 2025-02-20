@@ -7,13 +7,13 @@ public class Produto {
     private String nome;
     private String tipo;
     private String descricao;
-    private String valor;
+    private Double valor;
     private Double quantidadeEstoque;
     private Double quantidadeReservada;
     private LocalDateTime horaImportacao;
 
 
-    public Produto(String nome, String tipo, String descricao, String valor, Double quantidadeEstoque, Double quantidadeReservada, LocalDateTime horaImportacao) {
+    public Produto(String nome, String tipo, String descricao, Double valor, Double quantidadeEstoque, Double quantidadeReservada, LocalDateTime horaImportacao) {
         if (nome.isEmpty()) {
             throw new IllegalArgumentException("Nome Vazio");
         }
@@ -23,7 +23,7 @@ public class Produto {
         if (descricao.isEmpty()) {
             throw new IllegalArgumentException("Descricao Vazio");
         }
-        if (valor.isEmpty()) {
+        if (valor == null || valor.compareTo(0d) < 1) {
             throw new IllegalArgumentException("Valor Vazio");
         }
         if (quantidadeEstoque <= 0.0) {
@@ -55,11 +55,11 @@ public class Produto {
         this.tipo = tipo;
     }
 
-    public String getValor() {
+    public Double getValor() {
         return valor;
     }
 
-    public void setValor(String valor) {
+    public void setValor(Double valor) {
         this.valor = valor;
     }
 

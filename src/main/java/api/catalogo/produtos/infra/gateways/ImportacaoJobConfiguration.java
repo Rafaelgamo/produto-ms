@@ -3,6 +3,7 @@ package api.catalogo.produtos.infra.gateways;
 import api.catalogo.produtos.infra.persistence.ProdutoEntity;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
+import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
 import org.springframework.batch.core.job.builder.JobBuilder;
 import org.springframework.batch.core.launch.support.RunIdIncrementer;
 import org.springframework.batch.core.repository.JobRepository;
@@ -12,7 +13,7 @@ import org.springframework.batch.item.ItemWriter;
 import org.springframework.batch.item.database.BeanPropertyItemSqlParameterSourceProvider;
 import org.springframework.batch.item.database.builder.JdbcBatchItemWriterBuilder;
 import org.springframework.batch.item.file.builder.FlatFileItemReaderBuilder;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.FileSystemResource;
@@ -22,10 +23,15 @@ import javax.sql.DataSource;
 
 
 @Configuration
+@EnableBatchProcessing
 public class ImportacaoJobConfiguration {
 
-    @Autowired
-    private PlatformTransactionManager transactionManager;
+    @Qualifier("batchTransactionManager")
+    private final PlatformTransactionManager transactionManager;
+
+    public ImportacaoJobConfiguration(PlatformTransactionManager transactionManager) {
+        this.transactionManager = transactionManager;
+    }
 
     @Bean
     public Job job(Step passoInicial, JobRepository jobRepository) {

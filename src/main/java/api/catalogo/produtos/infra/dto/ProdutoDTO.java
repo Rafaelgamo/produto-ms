@@ -7,12 +7,12 @@ public class ProdutoDTO {
     private String nome;
     private String tipo;
     private String descricao;
-    private String valor;
+    private Double valor;
     private Double quantidadeEstoque;
     private Double quantidadeReservada;
     private LocalDateTime horaImportacao;
 
-    public ProdutoDTO(Long id, String nome, String tipo, String descricao, String valor, Double quantidadeEstoque, Double quantidadeReservada, LocalDateTime horaImportacao) {
+    public ProdutoDTO(Long id, String nome, String tipo, String descricao, Double valor, Double quantidadeEstoque, Double quantidadeReservada, LocalDateTime horaImportacao) {
         this.id = id;
         this.nome = nome;
         this.tipo = tipo;
@@ -51,7 +51,7 @@ public class ProdutoDTO {
         this.descricao = descricao;
     }
 
-    public String getValor() {
+    public Double getValor() {
         return valor;
     }
 

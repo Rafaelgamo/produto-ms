@@ -45,8 +45,8 @@ public class CadastrarProdutoUseCaseTest {
 
         this.produtoController = new ProdutoController(cadastrarProdutoUseCase, buscarProdutoUseCase, excluirProdutoUseCase, alterarProdutoUseCase);
 
-        produto = new Produto("Mesa", "Movel de Madeira", "largura x, Tamanho y", "100", 15.0, 0.0, LocalDateTime.now());
-        produtoDTO = new ProdutoDTO(1L,"Mesa", "Movel de Madeira", "largura x, Tamanho y", "100", 15.0, 0.0, LocalDateTime.now());
+        produto = new Produto("Mesa", "Movel de Madeira", "largura x, Tamanho y", 100d, 15.0, 0.0, LocalDateTime.now());
+        produtoDTO = new ProdutoDTO(1L,"Mesa", "Movel de Madeira", "largura x, Tamanho y", 100d, 15.0, 0.0, LocalDateTime.now());
 
     }
 

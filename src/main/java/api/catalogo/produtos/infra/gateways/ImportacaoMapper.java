@@ -16,7 +16,7 @@ public class ImportacaoMapper implements FieldSetMapper<ProdutoEntity> {
         produto.setNome(fieldSet.readString("nome"));
         produto.setTipo(fieldSet.readString("tipo"));
         produto.setDescricao(fieldSet.readString("descricao"));
-        produto.setValor(fieldSet.readString("valor"));
+        produto.setValor(fieldSet.readDouble("valor"));
         produto.setQuantidadeEstoque(fieldSet.readDouble("quantidadeEstoque"));
         produto.setQuantidadeReservada(fieldSet.readDouble("quantidadeReservada"));
         produto.setHoraImportacao(LocalDateTime.now());

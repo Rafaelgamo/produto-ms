@@ -4,7 +4,7 @@ public record AlteraProdutoDTO(
         String nome,
         String tipo,
         String descricao,
-        String valor,
+        Double valor,
         Double quantidadeEstoque
 
 ) {

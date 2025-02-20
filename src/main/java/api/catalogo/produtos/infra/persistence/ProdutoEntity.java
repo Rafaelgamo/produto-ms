@@ -18,7 +18,7 @@ public class ProdutoEntity {
     private String nome;
     private String tipo;
     private String descricao;
-    private String valor;
+    private Double valor;
     private Double quantidadeEstoque;
     private Double quantidadeReservada;
     private LocalDateTime horaImportacao;
@@ -26,14 +26,14 @@ public class ProdutoEntity {
     public ProdutoEntity() {
     }
 
-    public ProdutoEntity(Long id, String nome, String valor) {
+    public ProdutoEntity(Long id, String nome, Double valor) {
         this.id = id;
         this.nome = nome;
         this.valor = valor;
 
     }
 
-    public ProdutoEntity(String nome, String tipo, String descricao, String valor, Double quantidadeEstoque, Double quantidadeReservada, LocalDateTime horaImportacao) {
+    public ProdutoEntity(String nome, String tipo, String descricao, Double valor, Double quantidadeEstoque, Double quantidadeReservada, LocalDateTime horaImportacao) {
         this.nome = nome;
         this.tipo = tipo;
         this.descricao = descricao;
@@ -43,7 +43,7 @@ public class ProdutoEntity {
         this.horaImportacao = horaImportacao;
     }
 
-    public ProdutoEntity(Long id, String nome, String tipo, String descricao, String valor, Double quantidadeEstoque, Double quantidadeReservada, LocalDateTime horaImportacao) {
+    public ProdutoEntity(Long id, String nome, String tipo, String descricao, Double valor, Double quantidadeEstoque, Double quantidadeReservada, LocalDateTime horaImportacao) {
         this.id = id;
         this.nome = nome;
         this.tipo = tipo;
@@ -90,11 +90,11 @@ public class ProdutoEntity {
         return this.descricao;
     }
 
-    public void setValor(String valor) {
+    public void setValor(Double valor) {
         this.valor = valor;
     }
 
-    public String getValor() {
+    public Double getValor() {
         return this.valor;
     }
 

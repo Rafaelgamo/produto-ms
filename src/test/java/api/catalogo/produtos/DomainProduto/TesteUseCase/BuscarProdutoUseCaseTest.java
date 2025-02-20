@@ -34,7 +34,7 @@ public class BuscarProdutoUseCaseTest {
     private ProdutoGateway produtoGateway;
     private ProdutoRepository produtoRepository;
 
-    private ProdutoDTO produto = new ProdutoDTO(1L, "nome", "tipo", "descricao", "35", 100.0, 0.0, LocalDateTime.now());
+    private ProdutoDTO produto = new ProdutoDTO(1L, "nome", "tipo", "descricao", 35d, 100.0, 0.0, LocalDateTime.now());
 
     private Long id = 1L;
     private final List<Long> itens = List.of(id);

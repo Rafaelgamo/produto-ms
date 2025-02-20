@@ -21,13 +21,13 @@ public class PedidoExternalJpaGateway implements PedidoExternalGateway {
     }
 
     @Override
-    @Transactional("transactionManager")
+    @Transactional(transactionManager = "transactionManager")
     public PedidoExternalEntity buscarPorId(Long id) {
         return pedidoExternalRepository.findById(id).orElse(null);
     }
 
     @Override
-    @Transactional("transactionManager")
+    @Transactional(transactionManager = "transactionManager")
     public void cadastrarPedido(Long pedidoid, Map<Long, Double> quantidades) {
 //        var pedido = new PedidoExternalEntity(pedidoid);
 //        pedidoExternalRepository.save(pedido);
